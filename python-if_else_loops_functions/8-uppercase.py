@@ -1,6 +1,9 @@
+#!/usr/bin/python3
 def uppercase(str):
-    for char in str:
-        if ord(char) >= 97 and ord(char) <= 122:
-            char = chr(ord(char) - 32)
-        print(char, end="")
-    print()  # Print the newline at the end
+    for item in range(len(str)):
+        if ord(str[item]) >= ord('a') and ord(str[item]) <= ord('z'):
+            atoi = ord(str[item]) + (ord('A') - ord('a'))
+        else:
+            atoi = ord(str[item])
+        print("{}".format(chr(atoi)), end='')
+    print()
