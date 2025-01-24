@@ -11,13 +11,13 @@ def roman_to_int(roman_string):
     total = 0
     prev_value = 0
 
-    for char in reversed(roman_string):  # Process from right to left
+    for char in reversed(roman_string):
         current_value = roman_values.get(char, 0)
 
         if current_value < prev_value:
-            total -= current_value  # Subtract in cases like IV (4), IX (9)
+            total -= current_value
         else:
-            total += current_value  # Add value normally
+            total += current_value
 
         prev_value = current_value
 
