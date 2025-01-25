@@ -10,4 +10,9 @@ print_square(4)
 try:
     print_square(0.6)
 except TypeError as e:
-    print(e
+    print(e)
+# Expecting an exception when no arguments are provided
+try:
+    print_square()
+except TypeError as e:
+    print(e)
