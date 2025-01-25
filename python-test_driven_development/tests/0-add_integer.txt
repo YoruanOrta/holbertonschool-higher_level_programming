@@ -1,16 +1,39 @@
-# Valid test cases
-add_integer(3, 5) => 8
-add_integer(100) => 198
-add_integer(-2, 10) => 8
-add_integer(0, 0) => 0
-add_integer(5.5, 2.3) => 7
-add_integer(10.9, 2) => 12
-add_integer(3.1) => 101
+# Valid tests
+assert add_integer(3, 5) == 8
+assert add_integer(100) == 198
+assert add_integer(-2, 10) == 8
+assert add_integer(0, 0) == 0
+assert add_integer(5.5, 2.3) == 7
+assert add_integer(10.9, 2) == 12
+assert add_integer(3.1) == 101
 
-# Invalid test cases (should raise TypeError)
-add_integer("hello", 5) => TypeError: a must be an integer
-add_integer(5, "world") => TypeError: b must be an integer
-add_integer(None, 5) => TypeError: a must be an integer
-add_integer(5, None) => TypeError: b must be an integer
-add_integer([1, 2], 5) => TypeError: a must be an integer
-add_integer(5, {1: 2}) => TypeError: b must be an integer
+# Invalid tests (should raise TypeError)
+try:
+    add_integer("hello", 5)
+except TypeError as e:
+    assert str(e) == "a must be an integer"
+
+try:
+    add_integer(5, "world")
+except TypeError as e:
+    assert str(e) == "b must be an integer"
+
+try:
+    add_integer(None, 5)
+except TypeError as e:
+    assert str(e) == "a must be an integer"
+
+try:
+    add_integer(5, None)
+except TypeError as e:
+    assert str(e) == "b must be an integer"
+
+try:
+    add_integer([1, 2], 5)
+except TypeError as e:
+    assert str(e) == "a must be an integer"
+
+try:
+    add_integer(5, {1: 2})
+except TypeError as e:
+    assert str(e) == "b must be an integer"
