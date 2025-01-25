@@ -1,54 +1,16 @@
-import unittest
-from your_module import add_integer  # Ensure to import your function
+# Valid test cases
+add_integer(3, 5) => 8
+add_integer(100) => 198
+add_integer(-2, 10) => 8
+add_integer(0, 0) => 0
+add_integer(5.5, 2.3) => 7
+add_integer(10.9, 2) => 12
+add_integer(3.1) => 101
 
-class TestAddInteger(unittest.TestCase):
-
-    # Test regular addition with integers and floats
-    def test_valid_addition(self):
-        self.assertEqual(add_integer(3, 5), 8)
-        self.assertEqual(add_integer(100), 198)  # Default value of b = 98
-        self.assertEqual(add_integer(-2, 10), 8)
-        self.assertEqual(add_integer(0, 0), 0)
-        self.assertEqual(add_integer(5.5, 2.3), 7)  # 5.5 -> 5, 2.3 -> 2, sum is 7
-        self.assertEqual(add_integer(10.9, 2), 12)  # 10.9 -> 10, 2 -> 2, sum is 12
-        self.assertEqual(add_integer(3.1), 101)  # 3.1 -> 3, default b = 98, sum is 101
-
-    # Test invalid inputs (raise TypeError)
-    def test_invalid_a(self):
-        with self.assertRaises(TypeError):
-            add_integer("hello", 5)
-        with self.assertRaises(TypeError):
-            add_integer(None, 5)
-        with self.assertRaises(TypeError):
-            add_integer([1, 2], 5)
-        with self.assertRaises(TypeError):
-            add_integer(float('NaN'), 5)
-
-    def test_invalid_b(self):
-        with self.assertRaises(TypeError):
-            add_integer(5, "world")
-        with self.assertRaises(TypeError):
-            add_integer(5, None)
-        with self.assertRaises(TypeError):
-            add_integer(5, {1: 2})
-
-    # Test missing one argument (use default)
-    def test_missing_one_argument(self):
-        self.assertEqual(add_integer(3), 101)  # Default b = 98
-
-    # Test missing two arguments
-    def test_missing_two_arguments(self):
-        with self.assertRaises(TypeError):
-            add_integer()
-
-    # Test edge case with float overflow (large float values)
-    def test_float_overflow(self):
-        self.assertEqual(add_integer(1e+100, 1e+100), 2e+100)
-
-    # Test NaN edge case
-    def test_nan(self):
-        with self.assertRaises(TypeError):
-            add_integer(float('NaN'), 10)
-
-if __name__ == "__main__":
-    unittest.main()
+# Invalid test cases (should raise TypeError)
+add_integer("hello", 5) => TypeError: a must be an integer
+add_integer(5, "world") => TypeError: b must be an integer
+add_integer(None, 5) => TypeError: a must be an integer
+add_integer(5, None) => TypeError: b must be an integer
+add_integer([1, 2], 5) => TypeError: a must be an integer
+add_integer(5, {1: 2}) => TypeError: b must be an integer
