@@ -1,0 +1,13 @@
+print_square = __import__('4-print_square').print_square
+
+print_square(4)
+####
+####
+####
+####
+
+# Expecting an exception when passing a float
+try:
+    print_square(0.6)
+except TypeError as e:
+    print(e
