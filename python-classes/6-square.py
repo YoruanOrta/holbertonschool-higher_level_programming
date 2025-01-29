@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 """Module for Square with size and position"""
+
+
 class Square:
     """Represents a square"""
 
