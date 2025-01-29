@@ -16,6 +16,7 @@ Methods:
 
 
 class Square:
+    """ A class to represent a square. """
     def __init__(self, size=0):
         self.size = size
 
