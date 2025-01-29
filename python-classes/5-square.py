@@ -7,12 +7,14 @@ Classes:
             calculate its area and print the square using the '#' character.
 
 Methods:
-    __init__(self, size=0): Initializes a new Square instance with an optional size.
+    __init__(self, size=0): Initializes a new Square instance.
     size(self): Retrieves the size of the square.
     size(self, value): Sets the size of the square with validation.
     area(self): Returns the current square area.
     my_print(self): Prints the square with the character '#'.
 """
+
+
 class Square:
     def __init__(self, size=0):
         self.size = size
