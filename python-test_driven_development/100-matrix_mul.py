@@ -16,8 +16,9 @@ def matrix_mul(m_a, m_b):
         list of lists: The resulting matrix after multiplication.
 
     Raises:
-        TypeError: If m_a or m_b is not a list of lists, contains non-numeric data,
-                   or if rows are not of the same size.
+        TypeError: If m_a or m_b is not a list of lists, contains
+        non-numeric data,
+        or if rows are not of the same size.
         ValueError: If m_a or m_b is empty, or if they can't be multiplied.
     """
 
