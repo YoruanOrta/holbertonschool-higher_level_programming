@@ -5,6 +5,7 @@
 class Rectangle:
     """This class defines a simple Rectangle."""
 
+
     def __init__(self, width=0, height=0):
         """Creates a new instance of Rectangle.
 
