@@ -1,10 +1,10 @@
-#!/usr/bin/python3
+#!/usr/#!/usr/bin/python3
 """Module for Rectangle class."""
 
 
 class Rectangle:
     """This class defines a simple Rectangle."""
-
+    number_of_instances = 0
 
     def __init__(self, width=0, height=0):
         """Creates a new instance of Rectangle.
@@ -16,6 +16,7 @@ class Rectangle:
         self.width = width
         self.height = height
         self.print_symbol = "#"
+        Rectangle.number_of_instances += 1
 
     @property
     def width(self):
@@ -24,11 +25,7 @@ class Rectangle:
 
     @width.setter
     def width(self, value):
-        """Set the value of width.
-
-        Args:
-            value (int): The value to set width to.
-        """
+        """Set the value of width."""
         if not isinstance(value, int):
             raise TypeError("width must be an integer")
         if value < 0:
@@ -42,11 +39,7 @@ class Rectangle:
 
     @height.setter
     def height(self, value):
-        """Set the value of height.
-
-        Args:
-            value (int): The value to set height to.
-        """
+        """Set the value of height."""
         if not isinstance(value, int):
             raise TypeError("height must be an integer")
         if value < 0:
@@ -67,12 +60,9 @@ class Rectangle:
         """Return a string representation of the Rectangle."""
         if self.width == 0 or self.height == 0:
             return ""
-        return (
-            "\n".join([
-                str(self.print_symbol) * self.width
-                for _ in range(self.height)
-                ])
-        )
+        return "\n".join([
+            str(self.print_symbol) * self.width for _ in range(self.height)
+            ])
 
     def __repr__(self):
         """Return a string representation of the Rectangle for reproduction."""
@@ -85,16 +75,10 @@ class Rectangle:
 
     @print_symbol.setter
     def print_symbol(self, value):
-        """Set the value of print_symbol.
-
-        Args:
-            value (any): The value to set print_symbol to.
-        """
+        """Set the value of print_symbol."""
         self.__print_symbol = value
 
     def __del__(self):
         """Print a message when an instance of Rectangle is deleted."""
         print("Bye rectangle...")
         Rectangle.number_of_instances -= 1
-        del self
-    number_of_instances = 0
