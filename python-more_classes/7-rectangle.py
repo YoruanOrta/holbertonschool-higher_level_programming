@@ -5,17 +5,12 @@
 class Rectangle:
     """This class defines a simple Rectangle."""
     number_of_instances = 0
+    print_symbol = "#"
 
     def __init__(self, width=0, height=0):
-        """Creates a new instance of Rectangle.
-
-        Args:
-            width (int): The width of the rectangle.
-            height (int): The height of the rectangle.
-        """
+        """Creates a new instance of Rectangle."""
         self.width = width
         self.height = height
-        self.print_symbol = "#"
         Rectangle.number_of_instances += 1
 
     @property
@@ -57,26 +52,19 @@ class Rectangle:
         return 2 * (self.width + self.height)
 
     def __str__(self):
-        """Return a string representation of the Rectangle."""
+        """Return a string representation of the class using `print_symbol`."""
         if self.width == 0 or self.height == 0:
             return ""
-        return "\n".join([
-            str(self.print_symbol) * self.width for _ in range(self.height)
-            ])
+
+        # Use instance print_symbol if set, otherwise fallback to class-level
+        symbol = str(self.print_symbol)
+
+        line = symbol * self.width
+        return "\n".join([line] * self.height)
 
     def __repr__(self):
         """Return a string representation of the Rectangle for reproduction."""
-        return "Rectangle({}, {})".format(self.width, self.height)
-
-    @property
-    def print_symbol(self):
-        """Retrieve the value of print_symbol."""
-        return self.__print_symbol
-
-    @print_symbol.setter
-    def print_symbol(self, value):
-        """Set the value of print_symbol."""
-        self.__print_symbol = value
+        return f"Rectangle({self.width}, {self.height})"
 
     def __del__(self):
         """Print a message when an instance of Rectangle is deleted."""
