@@ -21,6 +21,10 @@ class Circle(Shape):
     def perimeter(self) -> float:
         return 2 * pi * self.radius
 
+    def __init__(self, radius: float):
+        if radius < 0:
+            raise ValueError("Radius must be non-negative")
+        self.radius = radius
 
 class Rectangle(Shape):
     def __init__(self, width: float, height: float):
