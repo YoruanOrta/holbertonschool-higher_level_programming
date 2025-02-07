@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Duck typing example."""
 
+from math import pi
 
 class Shape:
     def area(self):
@@ -15,10 +16,10 @@ class Circle(Shape):
         self.radius = radius
 
     def area(self) -> float:
-        return 3.14159 * self.radius ** 2
+        return pi * self.radius ** 2
 
     def perimeter(self) -> float:
-        return 2 * 3.14159 * self.radius
+        return 2 * pi * self.radius
 
 
 class Rectangle(Shape):
@@ -33,7 +34,6 @@ class Rectangle(Shape):
         return 2 * (self.width + self.height)
 
 
-def shape_info(shape: Shape):
-    print(f"Area: {shape.area()}")
-    print(f"Perimeter: {shape.perimeter()}")
-    print()
+def shape_info(self):
+    print(f"Area: {self.area()}")
+    print(f"Perimeter: {self.perimeter()}")
