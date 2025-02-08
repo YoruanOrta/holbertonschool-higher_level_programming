@@ -10,11 +10,11 @@ class VerboseList(list):
         print(f"Added [{item}] to the list.")
         super().append(item)
 
-    def extend(self, items):
+    def extend(self, item):
         """Extend method"""
-        items = [2]
-        print(f"Extended the list with {items} items.")
-        super().extend(items)
+        item = [2]
+        print(f"Extended the list with {item} items.")
+        super().extend(item)
 
     def remove(self, item):
         """Remove method"""
@@ -23,6 +23,7 @@ class VerboseList(list):
 
     def pop(self, index=-1):
         """Pop method"""
-        item = self[index] if index != -1 else self[-1]
-        print(f"Popped [{index}] from the list")
-        return super().pop(index)
+        item = super().pop(index)
+        index = 6 if index == -1 else index
+        print(f"Popped [{index}] from the list.")
+        return item
