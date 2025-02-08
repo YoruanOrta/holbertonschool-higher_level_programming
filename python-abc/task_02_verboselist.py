@@ -23,5 +23,6 @@ class VerboseList(list):
 
     def pop(self, index=-1):
         """Pop method"""
+        item = self[index] if index != -1 else self[-1]
         print(f"Popped [{index}] from the list")
         return super().pop(index)
