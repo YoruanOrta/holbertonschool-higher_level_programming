@@ -1,34 +1,21 @@
 #!/usr/bin/python3
-"""Module for add_item"""
+""" Module that adds all arguments to a Python list, and then save them to a file """
 
 
-def save_to_json_file(my_obj, filename):
-    """Writes an Object to a text file, using a JSON representation."""
-    with open(filename, 'w') as f:
-        import json
-        f.write(json.dumps(my_obj))
+import sys
+import os
 
+filename = "add_item.json"
 
-def load_from_json_file(filename):
-    """Method for loading a JSON file."""
+try:
     import json
-
-    with open(filename, 'r') as f:
-        return json.load(f)
-
-
-def add_item():
-    """Method for adding items to a list."""
-    import sys
-    import os
-
-    filename = "add_item.json"
     if os.path.exists(filename):
-        my_list = load_from_json_file(filename)
+        with open(filename, "r") as f:
+            my_list = json.load(f)
     else:
         my_list = []
-
-    for arg in sys.argv[1:]:
-        my_list.append(arg)
-
-    save_to_json_file(my_list, filename)
+    my_list.extend(sys.argv[1:])
+    with open(filename, "w") as f:
+        json.dump(my_list, f)
+except ImportError:
+    pass
