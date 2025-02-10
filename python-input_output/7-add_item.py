@@ -8,13 +8,15 @@ def save_to_json_file(my_obj, filename):
         import json
         f.write(json.dumps(my_obj))
 
+
 def load_from_json_file(filename):
     """Method for loading a JSON file."""
     import json
 
     with open(filename, 'r') as f:
         return json.load(f)
-    
+
+
 def add_item():
     """Method for adding items to a list."""
     import sys
