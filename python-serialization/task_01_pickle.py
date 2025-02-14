@@ -2,6 +2,7 @@
 """Create a custom class"""
 
 import pickle
+import os
 
 
 class CustomObject:
@@ -17,6 +18,10 @@ class CustomObject:
 
     @classmethod
     def deserialize(cls, filename):
+        if not os.path.exists(filename):
+            raise FileNotFoundError(f"File '{filename}' not found.")
+        if os.path.getsize(filename) == 0:
+            raise EOFError("File is empty.")
         with open(filename, 'rb') as f:
             return pickle.load(f)
 
