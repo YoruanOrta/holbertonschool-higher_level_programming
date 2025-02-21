@@ -39,7 +39,6 @@ def add_user():
     if not username:
         return jsonify({"error": "Username is required"}), 400
     if username in users:
-        print(f"DEBUG: Duplicate username detected: {username}")
         return jsonify({"error": "User already exists"}), 400
 
     users[username] = {
@@ -50,5 +49,3 @@ def add_user():
     }
 
     return jsonify({"message": "User added", "user": users[username]}), 201
-if __name__ == "__main__":
-    app.run(debug=True)
