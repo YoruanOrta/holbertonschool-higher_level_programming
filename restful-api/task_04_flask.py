@@ -39,8 +39,8 @@ def add_user():
     if not username:
         return jsonify({"error": "Username is required"}), 400
     if username in users:
+        print(f"DEBUG: Duplicate username detected: {username}")
         return jsonify({"error": "User already exists"}), 400
-
     users[username] = {
         "username": username,
         "name": data.get('name'),
