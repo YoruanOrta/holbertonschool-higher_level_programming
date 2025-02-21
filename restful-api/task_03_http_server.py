@@ -12,7 +12,7 @@ class RequestHandler(BaseHTTPRequestHandler):
         """ Handle GET request """
         parsed_path = urlparse(self.path)
         if parsed_path.path == "/":
-            self._send_response(200, "text/plain", "Welcome to the API")
+            self._send_response(200, "text/plain", "Hello, this is a simple API!")
         elif parsed_path.path == "/data":
             self._send_response(200, "application/json", {"name": "John", "age": 30, "city": "New York"})
         elif parsed_path.path == "/status":
