@@ -42,6 +42,8 @@ def add_user():
         return jsonify({"error": "Username is required"}), 400
     if username in users:
         return jsonify({"error": "User already exists"}), 400
+    if name not in data or age not in data or city not in data:
+        return jsonify({"error": "Name is required"}), 400
 
     users[username] = {
         "username": username,
@@ -50,3 +52,5 @@ def add_user():
         "city": data.get('city')
     }
     return jsonify({"message": "User added", "user": users[username]}), 201
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
