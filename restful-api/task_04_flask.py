@@ -1,8 +1,6 @@
 from flask import Flask, jsonify, request
-from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app)
 
 users = {}
 
@@ -25,9 +23,8 @@ def get_user(username):
     """Return the user data if the user exists."""
     user = users.get(username)
     if user:
-        return jsonify(user)
-    else:
-        return jsonify({"error": "User not found"}), 404
+        return jsonify(user), 200
+    return jsonify({"error": "User not found"}), 404
 
 @app.route('/add_user', methods=['POST'])
 def add_user():
@@ -37,19 +34,27 @@ def add_user():
         if not data:
             return jsonify({"error": "Invalid JSON"}), 400
 
-        username = data.get('username')
+        username = data.get("username", "").strip()
+        name = data.get("name", "").strip()
+        age = data.get("age")
+        city = data.get("city", "").strip()
+
+        # Validate username
         if not username:
             return jsonify({"error": "Username is required"}), 400
         if username in users:
             return jsonify({"error": "User already exists"}), 400
-        if "name" not in data or "age" not in data or "city" not in data:
-            return jsonify({"error": "All fields are required"}), 400
 
+        # Validate other fields
+        if not name or age is None or not city:
+            return jsonify({"error": "All fields (name, age, city) are required"}), 400
+
+        # Store user
         users[username] = {
             "username": username,
-            "name": data.get('name'),
-            "age": data.get('age'),
-            "city": data.get('city')
+            "name": name,
+            "age": age,
+            "city": city
         }
         return jsonify({"message": "User added", "user": users[username]}), 201
     except Exception as e:
