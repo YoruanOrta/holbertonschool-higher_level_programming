@@ -1,36 +1,40 @@
 #!/usr/bin/python3
 """ Task 04 - Flask """
 
-from flask import Flask, jsonify
-from flask import request
+from flask import Flask, jsonify, request
+
 app = Flask(__name__)
 
-users = {"jane": {"username": "jane", "name": "Jane", "age": 28, "city": "Los Angeles"}}
+users = {}
+
 @app.route('/')
 def home():
     return "Welcome to the Flask API!"
 
 @app.route('/data')
 def get_usernames():
-    usernames = list(users.keys())
+    """Return a list of all usernames."""
     return jsonify(list(users.keys())), 200
-    return jsonify(usernames)
+
 @app.route('/status')
 def status():
+    """Return a simple status message."""
     return "OK"
 
 @app.route('/users/<username>')
 def get_user(username):
+    """Return the user data if the user exists."""
     user = users.get(username)
     if user:
         return jsonify(user)
     else:
         return jsonify({"error": "User not found"}), 404
+
 @app.route('/add_user', methods=['POST'])
 def add_user():
     """Add a new user to the dictionary."""
     data = request.get_json()
-    
+
     username = data.get('username')
     if not username:
         return jsonify({"error": "Username is required"}), 400
