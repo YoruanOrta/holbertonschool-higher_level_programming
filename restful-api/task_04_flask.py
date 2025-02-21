@@ -13,6 +13,7 @@ def home():
 @app.route('/data')
 def get_usernames():
     usernames = list(users.keys())
+    return jsonify(list(users.keys())), 200
     return jsonify(usernames)
 @app.route('/status')
 def status():
@@ -27,10 +28,12 @@ def get_user(username):
         return jsonify({"error": "User not found"}), 404
 @app.route('/add_user', methods=['POST'])
 def add_user():
+    """Add a new user to the dictionary."""
     data = request.get_json()
+    
     username = data.get('username')
-    if not username or username in users:
-        return jsonify({"error": "Invalid or duplicate username"}), 400
+    if not username:
+        return jsonify({"error": "Username is required"}), 400
     if username in users:
         return jsonify({"error": "User already exists"}), 400
 
@@ -40,6 +43,7 @@ def add_user():
         "age": data.get('age'),
         "city": data.get('city')
     }
+
     return jsonify({"message": "User added", "user": users[username]}), 201
 
 if __name__ == "__main__":
