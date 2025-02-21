@@ -1,7 +1,9 @@
 #!/usr/bin/python3
 """ Task 04 - Flask """
 
-from flask import Flask, jsonify, request
+from flask import Flask
+from flask import jsonify
+from flask import request
 
 app = Flask(__name__)
 
@@ -47,5 +49,4 @@ def add_user():
         "age": data.get('age'),
         "city": data.get('city')
     }
-
     return jsonify({"message": "User added", "user": users[username]}), 201
