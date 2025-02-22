@@ -1,8 +1,10 @@
+#!/usr/bin/python3
+""" A simple Flask API with a dictionary of users """
+
 from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
-# Dictionary to store user data
 users = {}
 
 @app.route('/')
@@ -32,20 +34,17 @@ def get_user(username):
 def add_user():
     """Add a new user to the dictionary"""
     try:
-        # Get JSON data from request
         data = request.get_json()
-        print("Received JSON:", data)  # Debugging print
+        print("Received JSON:", data)
 
         if not data:
             return jsonify({"error": "Invalid JSON"}), 400
 
-        # Extract and validate fields
         username = data.get("username", "").strip()
         name = data.get("name", "").strip()
         city = data.get("city", "").strip()
         age = data.get("age")
 
-        # Ensure required fields are provided
         if not username:
             return jsonify({"error": "Username is required"}), 400
         if username in users:
@@ -53,13 +52,11 @@ def add_user():
         if not name or not city:
             return jsonify({"error": "All fields (username, name, age, city) are required"}), 400
 
-        # Validate age (must be an integer)
         try:
-            age = int(age)  # Convert age to integer
+            age = int(age)
         except (TypeError, ValueError):
             return jsonify({"error": "Age must be a number"}), 400
 
-        # Store user in dictionary
         users[username] = {
             "username": username,
             "name": name,
@@ -67,7 +64,7 @@ def add_user():
             "city": city
         }
 
-        print("Updated users:", users)  # Debugging print
+        print("Updated users:", users)
 
         return jsonify({"message": "User added", "user": users[username]}), 201
 
