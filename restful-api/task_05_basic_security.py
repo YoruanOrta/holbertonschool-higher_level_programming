@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """ Task 05: Basic Security """
 
+import json
 from flask import Flask, jsonify, request
 from flask_httpauth import HTTPBasicAuth
 from flask_jwt_extended import (
@@ -43,19 +44,31 @@ def login():
     if not user or not check_password_hash(user["password"], password):
         return jsonify({"error": "Invalid credentials"}), 401
 
-    access_token = create_access_token(identity={"username": username, "role": user["role"]})
+    identity = json.dumps({"username": username, "role": user["role"]})
+    access_token = create_access_token(identity=identity)
+    
     return jsonify({"access_token": access_token}), 200
 
 @app.route('/jwt-protected')
 @jwt_required()
 def jwt_protected():
+    import json
+
+    identity_str = get_jwt_identity()
+    identity = json.loads(identity_str)
+
+    print(f"Received Identity: {identity}")
     return jsonify({"message": "JWT Auth: Access Granted"}), 200
 
 @app.route('/admin-only')
 @jwt_required()
 def admin_only():
-    current_user = get_jwt_identity()
-    if current_user["role"] != "admin":
+    import json
+
+    identity_str = get_jwt_identity()
+    identity = json.loads(identity_str)
+
+    if identity["role"] != "admin":
         return jsonify({"error": "Admin access required"}), 403
 
     return jsonify({"message": "Admin Access: Granted"}), 200
