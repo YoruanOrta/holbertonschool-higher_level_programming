@@ -1,26 +1,36 @@
 #!/usr/bin/python3
+"""
+This module filters state names by thir first letter
+"""
 import MySQLdb
 import sys
-""" Module that filters states that start with 'N' """
+
 
 def main():
-    """ Main function """
-    username = sys.argv[1]
-    password = sys.argv[2]
-    database = sys.argv[3]
+    """
+    main function that runs the module
+    """
+    mysql_username = sys.argv[1]
+    mysql_password = sys.argv[2]
+    mysql_database = sys.argv[3]
 
-    db = MySQLdb.connect(host="localhost", port=3306, user=username, passwd=password, db=database)
+    conn = MySQLdb.connect(
+        host="localhost",
+        port=3306,
+        user=mysql_username,
+        passwd=mysql_password,
+        db=mysql_database,
+        charset="utf8"
+        )
+    cur = conn.cursor()
+    cur.execute(f"SELECT * FROM states WHERE BINARY states.name\
+                LIKE 'N%' ORDER BY states.id ASC")
+    query_rows = cur.fetchall()
+    for row in query_rows:
+        print("({}, '{}')".format(row[0], row[1]))
+    cur.close()
+    conn.close()
 
-    cursor = db.cursor()
-
-    cursor.execute("SELECT id, name FROM states WHERE name LIKE 'N%' ORDER BY id ASC")
-
-    states = cursor.fetchall()
-    for state in states:
-        print(state)
-
-    cursor.close()
-    db.close()
 
 if __name__ == "__main__":
     main()
