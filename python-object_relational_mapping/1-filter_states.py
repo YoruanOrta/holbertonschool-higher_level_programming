@@ -1,15 +1,11 @@
 #!/usr/bin/python3
-"""
-This module filters state names by thir first letter
-"""
+"""This module filters state names by thir first letter"""
 import MySQLdb
 import sys
 
 
 def main():
-    """
-    main function that runs the module
-    """
+    """main function that runs the module"""
     mysql_username = sys.argv[1]
     mysql_password = sys.argv[2]
     mysql_database = sys.argv[3]
