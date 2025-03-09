@@ -20,9 +20,9 @@ if __name__ == "__main__":
     # Create a cursor object to execute queries
     cur = db.cursor()
 
-    # Execute the query with format (unsafe, but per requirements)
+    # Execute the query with case-sensitive comparison
     query = (
-        "SELECT * FROM states WHERE name = '{}' ORDER BY id ASC"
+        "SELECT * FROM states WHERE BINARY name = '{}' ORDER BY id ASC"
         .format(state_name)
     )
     cur.execute(query)
