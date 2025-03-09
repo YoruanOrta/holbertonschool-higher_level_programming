@@ -27,13 +27,10 @@ if __name__ == "__main__":
     # Fetch all matching rows
     rows = cur.fetchall()
 
-    # Handle the case when no results are found
-    if len(rows) == 0:
-        print("")
-
-    # Otherwise, print each record
-    for row in rows:
-        print(row)
+    # Only print if there are results
+    if rows:
+        for row in rows:
+            print(row)
 
     # Close the cursor and connection
     cur.close()
