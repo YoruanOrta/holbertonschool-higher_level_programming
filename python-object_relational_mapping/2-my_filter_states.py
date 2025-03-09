@@ -10,8 +10,8 @@ if __name__ == "__main__":
     db = MySQLdb.connect(host="localhost", port=3306, user=argv[1], passwd=argv[2], db=argv[3])
     cursor = db.cursor()
 
-    # Executing the Query
-    cursor.execute("SELECT * FROM states WHERE name = '{}' ORDER BY id ASC".format(argv[4]))
+    # Executing the Query with parameterized input to prevent SQL injection
+    cursor.execute("SELECT * FROM states WHERE name = %s ORDER BY id ASC", (argv[4],))
 
     # Obtaining the Query results
     query_rows = cursor.fetchall()
