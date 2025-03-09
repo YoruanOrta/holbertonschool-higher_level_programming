@@ -24,8 +24,10 @@ if __name__ == "__main__":
     query = "SELECT * FROM states WHERE BINARY name = %s ORDER BY id ASC"
     cur.execute(query, (state_name,))
 
-    # Fetch and print results
+    # Fetch **all** matching rows
     rows = cur.fetchall()
+
+    # Print results exactly as expected
     for row in rows:
         print(row)
 
