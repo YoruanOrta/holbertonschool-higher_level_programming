@@ -10,9 +10,10 @@ import sys
 if __name__ == "__main__":
     # Ensure there are exactly 3 arguments
     if len(sys.argv) != 4:
-        print("Usage: ./4-cities_by_state.py "
-                "mysql_username mysql_password "
-                "database_name")
+        print(
+            "Usage: ./4-cities_by_state.py "
+            "mysql_username mysql_password database_name"
+        )
         sys.exit(1)
 
     # Get command-line arguments
