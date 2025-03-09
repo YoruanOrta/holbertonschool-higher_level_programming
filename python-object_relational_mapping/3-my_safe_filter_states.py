@@ -24,8 +24,11 @@ if __name__ == "__main__":
     query = "SELECT * FROM states WHERE BINARY name = %s ORDER BY id ASC"
     cur.execute(query, (state_name,))
 
-    # Fetch **all** matching rows
+    # Fetch results
     rows = cur.fetchall()
+
+    # Debugging output
+    print(f"Rows fetched: {len(rows)}")  # Check if rows are returned
 
     # Print results exactly as expected
     for row in rows:
