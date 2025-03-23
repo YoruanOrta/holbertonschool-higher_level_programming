@@ -3,6 +3,11 @@ from flask import Flask, render_template
 
 app = Flask(__name__)
 
+def item_data():
+    with open("items.json") as items:
+        data = json.load(items)
+    return data
+
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -17,9 +22,8 @@ def contact():
 
 @app.route('/items')
 def items():
-    with open('items.json', 'r') as file:
-        data = json.load(file)
-    return render_template('items.html', items=data['items'])
+    data = item_data()
+    return render_template('items.html', data=data)
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)

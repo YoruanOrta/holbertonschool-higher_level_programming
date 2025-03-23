@@ -1,21 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Items List</title>
-</head>
-<body>
-    <h1>Items List</h1>
-
-    {% if items %}
-        <ul>
-            {% for item in items %}
+<!doctype html>
+    <html lang="en">
+    <head>
+        <title>Items List</title>
+    </head>
+    <body>
+    {% include 'header.html' %}
+        <h1>Items List</h1>
+        <p>This is a list of items:</p>
+    <ul>
+        {% if data %}
+            {% for item in data['items'] %}
                 <li>{{ item }}</li>
             {% endfor %}
-        </ul>
-    {% else %}
-        <p>No items found</p>
-    {% endif %}
-</body>
-</html>
+        {% else %}
+            <p>No items found</p>
+        {% endif %}
+    </ul>
+    {% include 'footer.html' %}
+    </body>
+    </html>
