@@ -42,6 +42,7 @@ HTML should not reload for each action: DOM manipulation, update values, fetch d
 
 Tasks list:
 Mandatory-
+
 0. Color Me
 1. Click and turn red
 2. Add `.red` class
